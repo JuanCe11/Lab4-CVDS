@@ -10,8 +10,14 @@ public class PowerScore implements GameScore{
 	 * @param incorrectCount letras incorrectas
 	 */
 	public int calculateScore(int correctCount, int incorrectCount) {
-		// TODO Auto-generated method stub
-		return -1;
+		int puntaje = 0;
+		for (int i = 1; i < correctCount+1; i++) {
+			puntaje += Math.pow(5, i);
+		}
+		puntaje -= 8 * incorrectCount;
+		puntaje = (puntaje<0)?0:puntaje;
+		puntaje = (puntaje>500)?500:puntaje;
+		return puntaje;
 	}
 	
 }

@@ -10,8 +10,11 @@ public class BonusScore implements GameScore{
 	 * @param incorrectCount letras incorrectas
 	 */
 	public int calculateScore(int correctCount, int incorrectCount) {
-		// TODO Auto-generated method stub
-		return -1;
+		int puntaje = 0;
+		puntaje += 10 * correctCount;
+		puntaje -= 5 * incorrectCount;
+		puntaje = (puntaje<0)?0:puntaje;
+		return puntaje;
 	}
 
 }

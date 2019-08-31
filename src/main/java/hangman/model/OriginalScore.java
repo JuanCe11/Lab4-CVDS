@@ -10,8 +10,10 @@ public class OriginalScore implements GameScore{
 	 * @param incorrectCount letras incorrectas
 	 */
 	public int calculateScore(int correctCount, int incorrectCount) {
-		// TODO Auto-generated method stub
-		return -1;
+		int puntaje = 100;
+		puntaje -= 10 * incorrectCount;
+		puntaje = (puntaje<0)?0:puntaje;
+		return puntaje;
 	}
 
 }
