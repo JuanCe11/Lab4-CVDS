@@ -32,6 +32,7 @@ public class GameModel {
     private String randomWord;
     private char[] randomWordCharArray;
     
+    private GameScore scoreInyectado;
     
    
     public GameModel(HangmanDictionary dictionary){
@@ -41,9 +42,34 @@ public class GameModel {
         randomWordCharArray = randomWord.toCharArray();
         incorrectCount = 0;
         correctCount = 0;
-        gameScore = 100;
-        
+        gameScore = 100;    
     }
+    public GameModel(HangmanDictionary dictionary,GameScore score){
+        //this.dictionary = new EnglishDictionaryDataSource();
+        this.dictionary = dictionary;
+        randomWord = selectRandomWord();
+        randomWordCharArray = randomWord.toCharArray();
+        incorrectCount = 0;
+        correctCount = 0;
+        gameScore = 100;
+        scoreInyectado = score;
+    }
+    
+    /**
+     * Devuelve el GameScore
+     * @return el GameScore
+     */
+    private GameScore getInyectScore() {
+		return scoreInyectado;
+	}
+    
+    /**
+     * Asigna el GameScore
+     * @param score 
+     */
+    private void setInyectScore(GameScore score) {
+		scoreInyectado = score;
+	}
     
     //method: reset
     //purpose: reset this game model for a new game
@@ -74,7 +100,7 @@ public class GameModel {
         }
         if(positions.size() == 0){
             incorrectCount++;
-            gameScore -= 10;
+            gameScore -= scoreInyectado.calculateScore(correctCount,incorrectCount);
         } else {
             correctCount += positions.size();
         }

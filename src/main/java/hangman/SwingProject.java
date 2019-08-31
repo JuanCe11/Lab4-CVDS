@@ -30,10 +30,12 @@ package hangman;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
+import hangman.model.ScoreType;
 import hangman.setup.factoryMethod.HangmanDefaultFactoryMethod;
 import hangman.setup.guice.HangmanFactoryServices;
 
 public class SwingProject {
+	static ScoreType tipo;
 
     public static final String CONTRIBUTORS[] = {
             "Omar Rodriguez, 008796203",
@@ -45,7 +47,7 @@ public class SwingProject {
     public static final String PROJECT_NAME = "CS 245 - Swing Project v1";
 
     public static GUI createGUIUsingFactoryMethod() {
-        return new GUI(new HangmanDefaultFactoryMethod());
+        return new GUI(new HangmanDefaultFactoryMethod(),tipo);
     }
 
     public static GUI createGUIUsingGuice() {
@@ -56,6 +58,7 @@ public class SwingProject {
     //method: main
     //purpose: the entry-point to our application
     public static void main(String[] args) {
+    	tipo = ScoreType.valueOf(args[0]);
         createGUIUsingFactoryMethod().play();
     }
 
