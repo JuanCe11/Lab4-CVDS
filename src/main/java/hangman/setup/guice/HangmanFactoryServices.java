@@ -22,7 +22,7 @@ public class HangmanFactoryServices extends com.google.inject.AbstractModule {
     @Override
     protected void configure() {
         /* Guice dependency injection */
-        bind(GameScore.class).to(OriginalScore.class);
+        // bind(Interface.class).to(Concrete.class);
     }
 
 }

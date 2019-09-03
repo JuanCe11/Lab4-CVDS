@@ -33,6 +33,7 @@ public class GUI {
     private Language language;
     private HangmanDictionary dictionary;
     private HangmanPanel hangmanPanel;
+    private GameScore gameScore;
 
     private MainFrameController mainFrameController;
 
@@ -42,15 +43,13 @@ public class GUI {
     private CreditsController creditsController;
     private GameOverController gameoverController;
     private HighScoreController highScoreController;
-    
-    GameModel gameModel;
-  
+
     // Use Factory method
-    public GUI(HangmanFactoryMethod factoryMethod,ScoreType tipoScore) {
+    public GUI(HangmanFactoryMethod factoryMethod) {
         this.language = factoryMethod.createLanguage();
         this.dictionary = factoryMethod.createDictionary();
         this.hangmanPanel = factoryMethod.createHangmanPanel();
-        gameModel = factoryMethod.createModel(this.dictionary,factoryMethod.createScore(tipoScore));
+        this.gameScore=factoryMethod.createGameScore();
     }
 
     @Inject
@@ -82,6 +81,8 @@ public class GUI {
                 mainFrameController
         );
 
+        GameModel gameModel = new GameModel(dictionary);
+        gameModel.setScore(this.gameScore);
         gameController = new GameController(
                 new GamePanel(gameModel.getCharacterSet(), hangmanPanel, language),
                 gameModel,
